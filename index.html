@@ -4,8 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Library</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <h1><span class="material-symbols-outlined"> library_books </span> My Library</h1>
+      <button type="button" id="add-book">Add New Book</button>
+      <div class="add-form"></div>
+    </header>
+    <main class="content">
+      <div class="book-item">
+        <p class="title">Judul Buku</p>
+        <p class="author">Penulis</p>
+        <p class="pages">Halaman</p>
+        <p class="status">Read</p>
+        <div class="action">
+          <span class="material-symbols-outlined visibility">visibility</span>
+          <span class="material-symbols-outlined delete">delete</span>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
