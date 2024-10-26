@@ -8,10 +8,12 @@ function Book(title, author, pages, status) {
 }
 
 let book1 = new Book("The Necromancer", "Michael Scott", 403, "Not Read");
-let book2 = new Book("The Warlock", "Michael Scott", 400, "Not Read");
+let book2 = new Book("The Warlock", "Michael Scott", 400, "Read");
 let book3 = new Book("The Alchemist", "Michael Scott", 400, "Not Read");
+let book4 = new Book("The Alchemist", "Michael Scott", 400, "Read");
+let book5 = new Book("The Alchemist", "Michael Scott", 400, "Not Read");
 myLibrary.push(book1, book2, book3);
-
+myLibrary.push(book4);
 function addBookToLibrary() {}
 
 function deleteBook(index) {
@@ -40,11 +42,6 @@ for (const key in myLibrary) {
     return obj.title === myLibrary[key].title;
   });
 
-  // const indexNumber = document.createElement("p");
-  // indexNumber.setAttribute("style", "display:none;");
-  // indexNumber.classList.add("index-number");
-  // indexNumber.textContent = indexNum;
-
   const bookTitle = document.createElement("p");
   bookTitle.classList.add("title");
   bookTitle.textContent = myLibrary[key].title;
@@ -64,7 +61,11 @@ for (const key in myLibrary) {
   const visibility = document.createElement("span");
   visibility.classList.add("material-symbols-outlined");
   visibility.classList.add("visibility");
-  visibility.textContent = "visibility";
+  if (myLibrary[key].status === "Not Read") {
+    visibility.textContent = "visibility";
+  } else {
+    visibility.textContent = "visibility_off";
+  }
 
   const deleteBook = document.createElement("span");
   deleteBook.classList.add("material-symbols-outlined");
@@ -79,6 +80,17 @@ for (const key in myLibrary) {
   });
   const toggleButton = document.createElement("button");
   toggleButton.setAttribute("id", "visibility");
+  toggleButton.addEventListener("click", () => {
+    if (myLibrary[key].status === "Not Read") {
+      myLibrary[key].status = "Read";
+      visibility.textContent = "visibility_off";
+      bookStatus.textContent = myLibrary[key].status;
+    } else {
+      myLibrary[key].status = "Not Read";
+      visibility.textContent = "visibility";
+      bookStatus.textContent = myLibrary[key].status;
+    }
+  });
 
   // bookCard.appendChild(indexNumber);
   bookCard.appendChild(bookTitle);
