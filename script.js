@@ -7,20 +7,43 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-function addBookToLibrary() {}
-
 let book1 = new Book("The Necromancer", "Michael Scott", 403, "Not Read");
 let book2 = new Book("The Warlock", "Michael Scott", 400, "Not Read");
 let book3 = new Book("The Alchemist", "Michael Scott", 400, "Not Read");
-
 myLibrary.push(book1, book2, book3);
 
-console.log(myLibrary);
+function addBookToLibrary() {}
 
+function deleteBook(index) {
+  myLibrary.splice(index, 1);
+}
+
+const addBookButton = document.querySelector("#add-book");
+addBookButton.addEventListener("click", () => {
+  const formInput = document.querySelector(".add-form");
+  formInput.setAttribute("style", "display:flex;");
+});
+
+const cancelButton = document.querySelector("#cancel-button");
+cancelButton.addEventListener("click", () => {
+  const formInput = document.querySelector(".add-form");
+  formInput.setAttribute("style", "display:none;");
+});
+
+// display each book in mylibrary to book-card
 for (const key in myLibrary) {
   const bookContainer = document.querySelector(".content");
   const bookCard = document.createElement("div");
   bookCard.classList.add("book-item");
+
+  const indexNum = myLibrary.findIndex((obj) => {
+    return obj.title === myLibrary[key].title;
+  });
+
+  // const indexNumber = document.createElement("p");
+  // indexNumber.setAttribute("style", "display:none;");
+  // indexNumber.classList.add("index-number");
+  // indexNumber.textContent = indexNum;
 
   const bookTitle = document.createElement("p");
   bookTitle.classList.add("title");
@@ -48,6 +71,16 @@ for (const key in myLibrary) {
   deleteBook.classList.add("delete");
   deleteBook.textContent = "delete";
 
+  const deleteButton = document.createElement("button");
+  deleteButton.setAttribute("id", "delete");
+  deleteButton.addEventListener("click", () => {
+    bookCard.remove();
+    myLibrary.splice(0, 1);
+  });
+  const toggleButton = document.createElement("button");
+  toggleButton.setAttribute("id", "visibility");
+
+  // bookCard.appendChild(indexNumber);
   bookCard.appendChild(bookTitle);
   bookCard.appendChild(bookAuthor);
   bookCard.appendChild(bookPages);
@@ -56,11 +89,18 @@ for (const key in myLibrary) {
   const actionBar = document.createElement("div");
   actionBar.classList.add("action");
 
-  actionBar.appendChild(visibility);
-  actionBar.appendChild(deleteBook);
+  toggleButton.appendChild(visibility);
+  deleteButton.appendChild(deleteBook);
+
+  actionBar.appendChild(toggleButton);
+  actionBar.appendChild(deleteButton);
 
   bookCard.appendChild(actionBar);
   bookContainer.appendChild(bookCard);
 
-  console.log(myLibrary[key].title);
+  // const deleteButton = document.querySelector(".delete");
+
+  console.log(indexNum);
 }
+
+console.dir(myLibrary);

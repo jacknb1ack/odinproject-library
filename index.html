@@ -13,19 +13,45 @@
     <header class="header">
       <h1><span class="material-symbols-outlined"> library_books </span> My Library</h1>
       <button type="button" id="add-book">Add New Book</button>
-      <div class="add-form"></div>
+
+      <form action="">
+        <div class="add-form">
+          <div class="input-form">
+            <div class="title">
+              <label for="title">Title :</label>
+              <input type="text" name="title" id="title" required />
+            </div>
+            <div class="author">
+              <label for="author">Author :</label>
+              <input type="text" name="author" id="author" />
+            </div>
+            <div class="pages">
+              <label for="pages">Pages :</label>
+              <input type="number" name="pages" id="pages" min="1" max="999" />
+            </div>
+            <div class="status">
+              <label for="status">Status :</label>
+              <input type="text" name="status" id="status" />
+            </div>
+          </div>
+          <div class="input-button">
+            <button id="add-book-button">Add</button>
+            <button id="cancel-button">Cancel</button>
+          </div>
+        </div>
+      </form>
     </header>
     <main class="content">
-      <!-- <div class="book-item">
+      <div class="book-item">
         <p class="title">Judul Buku</p>
         <p class="author">Penulis</p>
         <p class="pages">Halaman</p>
         <p class="status">Read</p>
         <div class="action">
-          <span class="material-symbols-outlined visibility">visibility</span>
-          <span class="material-symbols-outlined delete">delete</span>
+          <button id="visibility"><span class="material-symbols-outlined visibility">visibility</span></button>
+          <button id="delete"><span class="material-symbols-outlined delete">delete</span></button>
         </div>
-      </div> -->
+      </div>
     </main>
   </body>
 </html>
