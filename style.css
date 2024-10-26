@@ -124,6 +124,13 @@ header {
   font-weight: 700;
 }
 
+#title,
+#author,
+#pages,
+#status {
+  width: 300px;
+}
+
 /* book item display */
 .content {
   display: grid;
