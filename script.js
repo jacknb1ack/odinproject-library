@@ -13,7 +13,12 @@ let book3 = new Book("The Alchemist", "Michael Scott", 400, "Not Read");
 let book4 = new Book("The Alchemist", "Michael Scott", 400, "Read");
 let book5 = new Book("The Alchemist", "Michael Scott", 400, "Not Read");
 myLibrary.push(book1, book2, book3);
-myLibrary.push(book4);
+
+const addBook = document.querySelector("#add-book-button");
+addBook.addEventListener("click", (e) => {
+  e.preventDefault();
+  addBookToLibrary();
+});
 
 function addBookToLibrary() {
   const bookTitle = document.getElementById("title").value;
@@ -21,10 +26,14 @@ function addBookToLibrary() {
   const bookPages = document.getElementById("pages").value;
   const bookStatus = document.getElementById("status").value;
 
-  let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
-  myLibrary.push(newBook);
-  document.querySelector("form").reset();
-  updateCard();
+  if (bookTitle === "" || bookAuthor === "" || bookPages === "") {
+    alert("All field must not be empty!");
+  } else {
+    let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
+    myLibrary.push(newBook);
+    document.querySelector("form").reset();
+    updateCard();
+  }
 }
 
 //add button to display add new book form
@@ -123,11 +132,5 @@ function updateCard() {
     bookContainer.appendChild(bookCard);
   }
 }
-
-const addBook = document.querySelector("#add-book-button");
-addBook.addEventListener("click", (e) => {
-  e.preventDefault();
-  addBookToLibrary();
-});
 
 updateCard();
