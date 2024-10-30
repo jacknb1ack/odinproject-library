@@ -1,10 +1,12 @@
 const myLibrary = [];
 
-function Book(title, author, pages, status) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+  }
 }
 
 let book1 = new Book("The Necromancer", "Michael Scott", 403, "Not Read");
@@ -26,7 +28,7 @@ function addBookToLibrary() {
   const bookPages = document.getElementById("pages").value;
   const bookStatus = document.getElementById("status").value;
 
-  if (bookTitle === "" || bookAuthor === "" || bookPages === "") {
+  if (bookTitle === "" || bookAuthor === "" || bookPages < 1) {
     alert("All field must not be empty!");
   } else {
     let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
@@ -55,38 +57,53 @@ function updateCard() {
   const bookContainer = document.querySelector(".content");
   bookContainer.innerHTML = "";
 
-  for (const key in myLibrary) {
+  for (const index in myLibrary) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-item");
 
     const indexNum = myLibrary.findIndex((obj) => {
-      return obj.title === myLibrary[key].title;
+      return obj.title === myLibrary[index].title;
     });
 
     const bookTitle = document.createElement("p");
     bookTitle.classList.add("title");
-    bookTitle.textContent = myLibrary[key].title;
+    bookTitle.textContent = myLibrary[index].title;
 
     const bookAuthor = document.createElement("p");
     bookAuthor.classList.add("author");
-    bookAuthor.textContent = myLibrary[key].author;
+    bookAuthor.textContent = myLibrary[index].author;
 
     const bookPages = document.createElement("p");
     bookPages.classList.add("pages");
-    bookPages.textContent = myLibrary[key].pages;
+    bookPages.textContent = myLibrary[index].pages;
 
     const bookStatus = document.createElement("p");
     bookStatus.classList.add("status");
-    bookStatus.textContent = myLibrary[key].status;
+    bookStatus.textContent = myLibrary[index].status;
 
+    // toggle read/not read status button
     const visibility = document.createElement("span");
     visibility.classList.add("material-symbols-outlined");
     visibility.classList.add("visibility");
-    if (myLibrary[key].status === "Not Read") {
+    if (myLibrary[index].status === "Not Read") {
       visibility.textContent = "visibility";
     } else {
       visibility.textContent = "visibility_off";
     }
+
+    const toggleButton = document.createElement("button");
+    toggleButton.setAttribute("id", "visibility");
+    toggleButton.addEventListener("click", () => {
+      if (myLibrary[index].status === "Not Read") {
+        myLibrary[index].status = "Read";
+        visibility.textContent = "visibility_off";
+        bookStatus.textContent = myLibrary[index].status;
+      } else {
+        myLibrary[index].status = "Not Read";
+        visibility.textContent = "visibility";
+        bookStatus.textContent = myLibrary[index].status;
+      }
+    });
 
     const deleteBook = document.createElement("span");
     deleteBook.classList.add("material-symbols-outlined");
@@ -98,20 +115,6 @@ function updateCard() {
     deleteButton.addEventListener("click", () => {
       bookCard.remove();
       myLibrary.splice(0, 1);
-    });
-
-    const toggleButton = document.createElement("button");
-    toggleButton.setAttribute("id", "visibility");
-    toggleButton.addEventListener("click", () => {
-      if (myLibrary[key].status === "Not Read") {
-        myLibrary[key].status = "Read";
-        visibility.textContent = "visibility_off";
-        bookStatus.textContent = myLibrary[key].status;
-      } else {
-        myLibrary[key].status = "Not Read";
-        visibility.textContent = "visibility";
-        bookStatus.textContent = myLibrary[key].status;
-      }
     });
 
     bookCard.appendChild(bookTitle);
